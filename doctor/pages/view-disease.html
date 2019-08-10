@@ -1,0 +1,163 @@
+
+<div class="breadcrumb-holder">
+	<div class="container-fluid">
+		<ul class="breadcrumb"> 
+			<li class="breadcrumb-item"><a href="doctor-dashboard">Home</a></li> 
+			<li class="breadcrumb-item =" aria-current="page"><a href="doctor-reported-disease">Reported Surveillance</a></li>
+			<li class="breadcrumb-item active" aria-current="page">View Surveillance</li> 
+		</ul>
+	</div>
+</div>
+
+
+<section class="w-100 d-block">
+	<h1 class="text-primary p-2 my-1 ">
+		Surveillance
+		<small class="pl-4 d-md-block pt-3">View a Surveillance</small>
+	</h1>
+
+</section>
+
+
+<!-- Statistics Section-->
+
+<section class="dashboard-counts section-padding">
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Count item widget-->
+			<div class="col-12">
+
+				<div class="card"> 
+					<div class="card-body"> 
+						<div>
+
+							<form name="diseaseProfile1" id="tprFrbd" method="post" parsley-data-validation  class="form-horizontal form-element col-12"    >  
+								
+
+								<div class="form-group row  "  >
+									<label for="date" class="col-sm-2 control-label text-capitalize">date  </label> 
+									<div class="col-sm-10" >
+										<p  name="date" class="h4 text-success" id="date"   title="{{disease.date}}"> {{disease.date | date:'yyyy-MM-dd'}}</p>  
+									</div>
+								</div>
+
+
+								
+
+
+								<div class="form-group row  "  >
+									<label for="name" class="col-sm-12 control-label text-capitalize">name  </label> 
+									<div class="col-sm-12" >
+										<p   name="name" class="form-control" id="name"  >{{disease.name}}</p>  
+									</div>
+								</div>
+
+
+								<div class="form-group row  "  >
+									<label for="age" class="col-sm-12 control-label text-capitalize">age  </label> 
+									<div class="col-sm-12" >
+										<p  name="age" class="form-control" id="inputName"  > {{disease.age}}
+										</p>
+
+									</div>
+								</div>
+
+
+								<div class="form-group row  "  >
+									<label for="gender" class="col-sm-12 control-label text-capitalize">gender  </label> 
+									<div class="col-sm-12" >
+										
+										<p  name="gender" class="form-control" id="gender"  >{{disease.gender}}</p>
+
+
+
+									</div>
+								</div>
+
+
+
+
+								<div class="form-group row  "  >
+									<label for="diagnosis" class="col-sm-2 control-label text-capitalize">diagnosis  </label> 
+									<div class="col-sm-10" >
+										<p  name="diagnosis" class="form-control" id="diagnosis"   >{{disease.diagnosis}}</p>
+									</div>
+								</div>
+
+								
+								<div class="form-group row  "  >
+									<label for="desc" class="col-sm-2 control-label text-capitalize">description  </label> 
+									<div class="col-sm-10" >
+										<p  name="desc" class="form-control" id="desc" >  {{disease.desc}}</p>
+									</div>
+								</div>
+
+
+								
+								
+								<div class="form-group row  "  >
+									<label for="address" class="col-sm-2 control-label text-capitalize">address  </label> 
+									<div class="col-sm-10" >
+										<p  name="desc" class="form-control" id="address" >  {{disease.address}}</p>
+									</div>
+								</div>
+		<div class="form-group row  "  >
+									<label for="district" class="col-sm-2 control-label text-capitalize">district  </label> 
+									<div class="col-sm-10" >
+										<p  name="desc" class="form-control" id="district" >  {{disease.district}}</p>
+									</div>
+								</div>
+								<div class="form-group row  "  >
+									<label for="block" class="col-sm-2 control-label text-capitalize">block  </label> 
+									<div class="col-sm-10" >
+										<p  name="desc" class="form-control" id="block" >  {{disease.block}}</p>
+									</div>
+								</div>
+								
+								<div class="form-group row  "  >
+									<label for="contact" class="col-sm-2 control-label text-capitalize">contact  </label> 
+									<div class="col-sm-10" >
+										<p  name="contact" class="form-control" id="contact" >  {{disease.contact}}</p>
+									</div>
+								</div>
+
+								
+								<div class="form-group row  "  >
+									<label for="plongitude" class="col-sm-2 control-label text-capitalize">longitude  </label> 
+									<div class="col-sm-10" >
+										<p  name="plongitude" class="form-control" id="plongitude" >  {{disease.plongitude}}</p>
+									</div>
+								</div>
+
+
+								<div class="form-group row  "  >
+									<label for="platitude" class="col-sm-2 control-label text-capitalize"> latitude  </label> 
+									<div class="col-sm-10" >
+										<p  name="platitude" class="form-control" id="platitude" >  {{disease.platitude}}</p>
+									</div>
+								</div>
+
+							</form>
+
+
+
+
+
+
+
+
+
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+
+			</div> 
+
+		</div>
+	</div>
+</section> 

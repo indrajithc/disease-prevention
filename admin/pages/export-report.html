@@ -1,0 +1,167 @@
+
+
+<div class="breadcrumb-holder">
+	<div class="container-fluid">
+		<ul class="breadcrumb"> 
+			<li class="breadcrumb-item"><a href="admin-dashboard">Home</a></li> 
+			<li class="breadcrumb-item active" aria-current="page">Export Report</li>
+		</ul>
+	</div>
+</div>
+
+<style type="text/css">
+table th  {
+	cursor: pointer;
+}
+
+</style>
+
+<section class="dashboard-counts  p-3 ">
+	<h3 class="text-primary text-capitalize">Export Report</h3>
+</section>
+<!-- Statistics Section-->
+
+<section class="dashboard-counts section-padding pt-2">
+	<div class="container-fluid">
+		<form method="post" ng-submit="getExportData()" data-parsley-validate>
+			<div class="row form form-horizontal"> 
+				
+				<div class="col-md-3 col-sm-12 form-group">   
+					<label for="dfrom" class="form-label">Date From</label>
+					<div class="input-group col-sm-12 py-3"  
+					moment-picker="dfrom" today="true"
+					min-date="date"
+					format="YYYY-MM-DD">
+
+					<input name="date" class="form-control"
+					placeholder="Select a date"
+					ng-model="dfrom"
+					ng-model-options="{ updateOn: 'blur' }" name="dfrom" id="dfrom" required autocomplete="off" >
+
+					<span class="input-group-addon nob4">
+						<i class="fa fa-calendar p-2"></i>
+					</span>
+				</div> 
+
+			</div>	
+			<div class="col-md-3 col-sm-12 form-group">   
+				<label for="dto" class="form-label">Date To</label>
+				<div class="input-group col-sm-12 py-3"  
+				moment-picker="dto" today="true"
+				min-date="dfrom"
+				format="YYYY-MM-DD">
+
+				<input name="date" class="form-control"
+				placeholder="Select a date"
+				ng-model="dto"
+				ng-model-options="{ updateOn: 'blur' }" name="dto" id="dto" required autocomplete="off" >
+
+				<span class="input-group-addon nob4">
+					<i class="fa fa-calendar p-2"></i>
+				</span>
+			</div> 
+		</div>	
+		<div class="col-md-3 col-sm-12 form-group">   
+			<button type="submit" class="btn btn-outline-warning btn-sm text-uppercase">find</button>
+		</div>	
+
+
+		<div class="col-md-3 col-sm-12 form-group" ng-show="diseases.length > 0">   
+
+
+			<div excel-export export-data="exportData" file-name="{{fileName}}"  ></div>
+		</div>	
+
+
+
+	</div>
+</form>
+<div class="row">
+
+
+	<div class="col-12">
+
+
+
+
+		<table datatable="ng" class="table table-hover bg-white" ng-show="diseases.length > 0">
+			<thead>
+				<tr> 
+
+
+					<th ng-click="$parent.sort('index')"> # 	<i class=" sort-icon" ng-show="sortKey=='index'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+					<th ng-click="$parent.sort('date')"> date 
+						<i class=" sort-icon" ng-show="sortKey=='date'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+						<th ng-click="$parent.sort('name')"> name 
+							<i class=" sort-icon" ng-show="sortKey=='name'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+							<th ng-click="$parent.sort('age')"> age 
+								<i class=" sort-icon" ng-show="sortKey=='age'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+								<th ng-click="$parent.sort('gender')"> gender
+									<i class=" sort-icon" ng-show="sortKey=='gender'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+
+
+									<th ng-click="$parent.sort('diagnosis')"> diagnosis 
+										<i class=" sort-icon" ng-show="sortKey=='diagnosis'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  	
+										<th ng-click="$parent.sort('by_name')"> added by 
+											<i class=" sort-icon" ng-show="sortKey=='by_name'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+
+											<th  > action </th>
+
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr  
+
+										dir-paginate="disease in diseases|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageC"
+
+										> 
+										<td> {{ $index + 1}}</td>
+
+
+										<td> {{disease.date}}</td>
+										<td> {{disease.name}}</td>
+										<td> {{disease.age}}</td>
+										<td> {{disease.gender}}</td> 
+										<td> {{disease.diagnosis}}</td> 
+
+										<td><span class="text-primary text-capitalize  cursor-pointer" ng-click="openUSer ( disease) " style="cursor: pointer;">{{disease.by_name}}</span></td>
+										<td><button class="btn btn-sm btn-info " ng-click="viewMe (disease )" title="view more ">VIEW</button></td>
+
+									</tr>
+
+								</tbody>
+							</table>
+
+
+
+						</div>
+
+
+						<dir-pagination-controls
+						max-size="pageC"
+						direction-links="true"
+						boundary-links="true" 
+						style="padding: 10px;"
+						>
+					</dir-pagination-controls>
+
+
+
+
+
+
+
+
+
+
+				</div> 
+			</div>
+		</div>
+	</section> 

@@ -1,0 +1,132 @@
+ 
+<div class="breadcrumb-holder">
+	<div class="container-fluid">
+		<ul class="breadcrumb"> 
+			<li class="breadcrumb-item"><a href="admin-dashboard">Home</a></li> 
+			<li class="breadcrumb-item active" aria-current="page">Reported Surveillance</li>
+		</ul>
+	</div>
+</div>
+
+<style type="text/css">
+table th  {
+	cursor: pointer;
+}
+
+</style>
+
+<section class="dashboard-counts  p-3 ">
+	<h3 class="text-primary text-capitalize">Reported Surveillance</h3>
+</section>
+<!-- Statistics Section-->
+
+<section class="dashboard-counts section-padding pt-2">
+	<div class="container-fluid">
+		<div class="row"> 
+			<div class="col-md-6 col-sm-12">
+				
+
+				<form class="form-inline float-left text-left">
+					<div class=" d-flex align-items-end border-bottom mx-1" ng-init="departmentFiler = '0'; ">  					 
+						
+						<i class="ti ti-filter p-2 flex-shrink-1"></i>
+						<select  name="base" class="form-control pl-2 border-0 no-shadow"   placeholder="select "  ng-model="dateFiter"  ng-change="showDateOnly(dateFiter)" >
+							<option selected="selected" ng-selected="true" value="0" >All</option>
+							<option ng-repeat="diseases in diseasesBase | unique:'date' " value="{{diseases.date}}"  >{{diseases.date}}</option>
+						</select>
+
+					</div>
+				</form>
+			</div>	
+
+			<div class="col-md-6 col-sm-12">
+				
+				<form class="form-inline float-right text-right">
+					<div class="form-group">
+						<label >Search</label>
+						<input type="text" ng-model="search" class="form-control" placeholder="Search">
+					</div>
+				</form>
+			</div>
+
+			<div class="col-12">
+				
+
+				<table datatable="ng" class="table table-hover">
+					<thead>
+						<tr> 
+
+
+							<th ng-click="$parent.sort('index')"> # 	<i class=" sort-icon" ng-show="sortKey=='index'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+							<th ng-click="$parent.sort('date')"> date 
+								<i class=" sort-icon" ng-show="sortKey=='date'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+								<th ng-click="$parent.sort('name')"> name 
+									<i class=" sort-icon" ng-show="sortKey=='name'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+									<th ng-click="$parent.sort('age')"> age 
+										<i class=" sort-icon" ng-show="sortKey=='age'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+										<th ng-click="$parent.sort('gender')"> gender
+											<i class=" sort-icon" ng-show="sortKey=='gender'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+
+
+											<th ng-click="$parent.sort('diagnosis')"> diagnosis 
+												<i class=" sort-icon" ng-show="sortKey=='diagnosis'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+												
+
+												
+												<th  > action </th>
+
+											</tr>
+										</thead>
+										<tbody>
+
+											<tr  
+
+											dir-paginate="disease in diseases|orderBy:sortKey:reverse|filter:search|itemsPerPage:5"
+
+											> 
+											<td> {{ $index + 1}}</td>
+
+
+											<td> {{disease.date}}</td>
+											<td> {{disease.name}}</td>
+											<td> {{disease.age}}</td>
+											<td> {{disease.gender}}</td> 
+
+											<td> {{disease.diagnosis}}</td>  
+											<td><button class="btn btn-sm btn-info " ng-click="viewMe (disease )" title="view more ">VIEW</button></td>
+
+										</tr>
+
+									</tbody>
+								</table>
+
+
+							</div>
+
+
+							<dir-pagination-controls
+							max-size="5"
+							direction-links="true"
+							boundary-links="true" 
+							style="padding: 10px;"
+							>
+						</dir-pagination-controls>
+
+
+
+
+
+
+
+
+
+
+					</div> 
+				</div>
+			</div>
+		</section> 

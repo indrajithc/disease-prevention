@@ -1,0 +1,273 @@
+
+<div class="breadcrumb-holder">
+	<div class="container-fluid">
+		<ul class="breadcrumb"> 
+			<li class="breadcrumb-item"><a href="admin-dashboard">Home</a></li> 
+			<li class="breadcrumb-item active" aria-current="page">Add Notification</li>
+		</ul>
+	</div>
+</div>
+
+<style type="text/css">
+table th  {
+	cursor: pointer;
+}
+
+</style>
+
+<section class="dashboard-counts  p-3 ">
+	<h3 class="text-primary text-capitalize">Add New Notifications</h3>
+</section>
+<!-- Statistics Section-->
+
+<section class="dashboard-counts section-padding p-2">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-12">
+
+				<form name="diseaseEachProfile1" id="tprFrbd" method="post" ng-submit="addNewNotfi()" parsley-data-validation  class="form-horizontal form-element col-12 parsley na-ka p-0"   >
+
+
+
+					<div class="form-group row  "  >
+						<label for="date" class="col-sm-2 control-label text-capitalize">expiry date  </label> 
+						<div class="col-sm-10" >
+							<!-- <input type="text"   class="form-control" title=" ">   -->
+
+							<div class="input-group col-sm-12"
+							moment-picker="notification.expiry" today="true"
+
+							min-date="date"
+							format="YYYY-MM-DD HH:mm:ss">
+							<span class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</span>
+							<input required name="date" class="form-control"
+							placeholder="Select a date"
+							ng-model="notification.expiry"
+							ng-model-options="{ updateOn: 'blur' }">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group row  "  >
+					<label for="date" class="col-sm-2 control-label text-capitalize">Type  </label> 
+					<div class="col-sm-10" >
+						<!-- <input type="text"   class="form-control" title=" ">   -->
+						<select class="form-control col-sm-12 text-capitalize"  required ng-model="notification.type">
+							<option selected disabled>select</option>
+							<option value="high alert">high alert</option>
+							<option value="alert">alert</option>
+							<option value="waning">waning</option>
+							<option value="notification">notification</option>
+							<option value="information">information</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row  "  >
+					<label for="date" class="col-sm-2 control-label text-capitalize">Subject  </label> 
+					<div class="col-sm-10" >
+						<input type="text"  class="form-control col-sm-12 text-capitalize"  required ng-model="notification.subject" >   
+					</div>
+				</div>
+
+
+				<div class="form-group row  "  >
+					<label for="date" class="col-sm-2 control-label text-capitalize">description  </label> 
+					<div class="col-sm-10" >
+						<textarea type="text"  class="form-control col-sm-12 text-capitalize"  required ng-model="notification.description" ></textarea> 
+					</div>
+				</div>
+
+
+				<div class="form-group row  "  >
+					<label for="date" class="col-sm-2 control-label text-capitalize">To  </label> 
+					<div class="col-sm-10" >
+
+						<div class="row">
+
+
+							<div class="col-sm-12 col-md-5">
+
+								<div class="form-group">
+									<label for="district" class="form-label  line-h-13 "> District   </label>
+									<select ng-change="diseaseEach.blocks = getMyBlocks( diseaseEach.district )" type="text" name="district" class="form-control  mt-2" id="district" placeholder="Select district"  ng-model="diseaseEach.district"   > 
+										<option  ng-repeat="district in districts track by $index" value="{{district}}">{{district}}</option>
+									</select> 
+								</div>
+
+							</div>
+
+							
+							<div class="col-sm-12 col-md-2">
+
+								<label for="block" class="form-label  line-h-13 "> Add new   </label>
+								<div class="form-group  mt-2">
+									<input type="button" name="" ng-click="addNow()" class="btn btn-sm btn-primary" value="add">
+
+								</div>
+
+							</div>
+
+							<div class="col-sm-12 col-md-5">
+
+								<div class="form-group">
+									<label for="district" class="form-label  line-h-13 "> District   </label>
+									<div class="mt-2"">
+										<p class="w-100 py-2 form-control  "  ng-repeat="value in notification.district">{{value}} <span class="p-1 cursor-pointer float-right" ng-click="temoveDist(value)"><i class="ti-close"></i></span> </p>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+
+
+
+						<!-- <input type="text"  class="form-control col-sm-12 text-capitalize"  required ng-model="notification.subject" >    -->
+					</div>
+				</div>
+
+				<div class="form-group row  "  >
+					<label for="date" class="col-sm-2 control-label text-capitalize">   </label> 
+					<div class="col-sm-10" >
+						<button class="btn btn-info ">Add</button>
+					</div>
+				</div>
+
+
+
+
+			</div>
+
+
+
+		</form>
+
+
+
+	</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="dashboard-counts  mt-5 bg-white p-3 ">
+	<h3 class="text-info text-capitalize">Added Notifications</h3>
+</section>
+<!-- Statistics Section-->
+
+<section class="dashboard-counts section-padding bg-white pt-2">
+	<div class="container-fluid">
+
+
+
+		<div class="row"> 
+			<div class="col-md-6 col-sm-12">
+				
+
+				<form class="form-inline float-left text-left">
+					<div class=" d-flex align-items-end border-bottom mx-1" ng-init="departmentFiler = '0'; ">  					 
+						
+						<i class="ti ti-filter p-2 flex-shrink-1"></i>
+						<select  name="base" class="form-control pl-2 border-0 no-shadow"   placeholder="select "  ng-model="dateFiter"  ng-change="showDateOnly(dateFiter)" >
+							<option selected="selected" ng-selected="true" value="0" >All</option>
+							<option ng-repeat="notifications in notificationsBase | unique:'date' " value="{{notifications.date}}"  >{{notifications.date}}</option>
+						</select>
+
+					</div>
+				</form>
+			</div>	
+
+			<div class="col-md-6 col-sm-12">
+				
+				<form class="form-inline float-right text-right">
+					<div class="form-group">
+						<label >Search</label>
+						<input type="text" ng-model="search" class="form-control" placeholder="Search">
+					</div>
+				</form>
+			</div>
+
+			<div class="col-12">
+				
+
+				<table datatable="ng" class="table table-hover">
+					<thead>
+						<tr> 
+
+
+							<th ng-click="$parent.sort('index')"> # 	<i class=" sort-icon" ng-show="sortKey=='index'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+							<th ng-click="$parent.sort('type')"> type 
+								<i class=" sort-icon" ng-show="sortKey=='type'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+								<th ng-click="$parent.sort('subject')"> Subject 
+									<i class=" sort-icon" ng-show="sortKey=='subject'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+									<th ng-click="$parent.sort('expiry')"> Expiry 
+										<i class=" sort-icon" ng-show="sortKey=='expiry'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+										<th ng-click="$parent.sort('to')"> to 
+											<i class=" sort-icon" ng-show="sortKey=='to'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+											<th ng-click="$parent.sort('description')"> description 
+												<i class=" sort-icon" ng-show="sortKey=='description'" ng-class="{'ti-angle-up':reverse,'ti-angle-down':!reverse}"></i></th>  
+
+												<th  > action </th>
+
+											</tr>
+										</thead>
+										<tbody>
+
+											<tr  
+
+											dir-paginate="notification in notifications|orderBy:sortKey:reverse|filter:search|itemsPerPage:5"
+
+											> 
+											<td> {{notification.index}}</td>
+
+
+											<td> {{notification.type}}</td>
+											<td> {{notification.subject}}</td>
+											<td> {{notification.expiry}}</td>
+											<td> 
+												<div>
+													<p ng-repeat="value in notification.to track by $index">{{value}}</p>
+												</div>
+											</td>
+											<td> {{notification.description}}</td> 
+
+											<td><button class="btn btn-sm btn-info " ng-click="deleteMe (notification )" title="delete">Delete</button></td>
+
+										</tr>
+
+									</tbody>
+								</table>
+
+
+							</div>
+
+
+							<dir-pagination-controls
+							max-size="5"
+							direction-links="true"
+							boundary-links="true" 
+							style="padding: 10px;"
+							>
+						</dir-pagination-controls>
+
+
+
+
+
+
+
+
+
+
+					</div> 
+				</div>
+			</div>
+		</section> 

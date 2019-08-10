@@ -1,0 +1,130 @@
+
+<div class="breadcrumb-holder">
+	<div class="container-fluid">
+		<ul class="breadcrumb"> 
+			<li class="breadcrumb-item"><a href="doctor-dashboard">Home</a></li> 
+			<li class="breadcrumb-item active" aria-current="page">add a File</li> 
+		</ul>
+	</div>
+</div>
+
+
+<section class="w-100 d-block">
+	<h1 class="text-primary p-2 my-1 ">
+		Surveillance AS File
+		<small class="pl-4 d-md-block pt-3">Report a Surveillance</small>
+	</h1>
+
+</section>
+
+
+<!-- Statistics Section-->
+
+<section class="dashboard-counts section-padding">
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Count item widget-->
+			<div class="col-12">
+
+				<div class="card"> 
+					<div class="card-body"> 
+						<div>
+
+							<form name="diseaseProfile1" id="tprFrbd" method="post" parsley-data-validation  ng-submit="uploadFile () " class="form-horizontal form-element col-12"    >  
+								
+
+								<div class="form-group row  "  >
+									<label for="date" class="col-sm-2 control-label text-capitalize">date  </label> 
+									<div class="col-sm-10" >
+										<p type="text" name="date" class="h4" id="date"  ng-class="{ 'text-success' : disease.server == 1 , 'text-danger' : disease.server != 1 }" title="{{disease.date}}"> {{disease.date | date:'yyyy-MM-dd'}}</p>  
+									</div>
+								</div>
+
+
+
+
+
+
+								<div class="form-group    row "  >
+
+									<label for="files" class="col-sm-2 control-label text-capitalize"> file :<span class="danger">*</span>  </label> 
+
+									<div class="col-sm-10 p-3 text-center border-info bg-info text-white"> 
+
+
+										<input type="file" name="attachment" class="form-control"  placeholder="Enter  image"  ng-model="disease.attachment"   ng-file-model="files"  id="fileToUpload"   ng-show="false"
+										onchange="angular.element(this).scope().setImages(this)"   accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+										text/plain, application/pdf, image/* , .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .xlsx, .xls " />
+
+										<div ng-repeat="file in files.slice(0)">
+											<span class=''>{{file.webkitRelativePath || file.name}}
+											</span> 
+										</div>
+
+
+
+										<div style="cursor: pointer;" onclick="document.getElementById('fileToUpload').click()" id="dropbox" class="dropbox" ng-class="dropClass">
+											<span>{{dropText}}</span>
+										</div> 
+
+
+										<div ng-show="progressVisible" class="width-100">
+											<div class="progress-bar">
+												<div class="uploaded" ng-style="{'width': progress+'%'}">
+													<span class="percenta-o">{{progress}}</span>
+												</div>
+											</div>
+										</div>
+
+
+
+
+
+									</div>
+								</div>
+
+
+								<div class="form-group row  "  >
+									<label for="description" class="col-sm-2 control-label text-capitalize">description  </label> 
+									<div class="col-sm-12" >
+										<textarea  class="form-control" id="description" name="description" ng-model="disease.description"></textarea>
+
+									</div>
+								</div>
+
+
+
+
+								<div class="row my-2   " >
+
+									<div class="offset-0 col-6  text-right ">
+										<button class="btn btn-outline-success float-right btn-sm   " type="submit">upload File  </button>
+									</div>
+								</div>
+
+
+							</form>
+
+
+
+
+
+
+
+
+
+
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+
+			</div> 
+
+		</div>
+	</div>
+</section> 

@@ -1,0 +1,458 @@
+<div class="breadcrumb-holder">
+	<div class="container-fluid">
+		<ul class="breadcrumb"> 
+			<li class="breadcrumb-item"><a href="doctor-dashboard">Home</a></li> 
+			<li class="breadcrumb-item active" aria-current="page">Surveillance</li> 
+		</ul>
+	</div>
+</div>
+
+
+<section class="w-100 d-block">
+	<h1 class="text-primary p-2 my-1 ">
+		Surveillance
+		<small class="pl-4 d-md-block pt-3">Report a Surveillance</small>
+	</h1>
+
+</section>
+
+<style type="text/css">
+.border.all-border-warning , .border.all-border-warning .border{
+	border-color: #ffc107 !important;
+}
+</style>
+<!-- Statistics Section-->
+
+<section class="dashboard-counts section-padding">
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Count item widget-->
+			<div class="col-12">
+
+				<div class="card"> 
+					<div class="card-header">
+						<p> total  {{ disease.length }} reports</p>
+						
+					</div>
+					<div class="card-body"> 
+						<div>
+
+							<form name="diseaseEachProfile1" id="tprFrbd" method="post" parsley-data-validation  class="form-horizontal form-element col-12 parsley na-ka p-0"    >  
+								<div class="row row-eq-height px-3 d-none d-md-flex text-white" ng-if="disease.length > 0 " >
+
+									<div class="col-sm-6 col-md-3 border bg-dark pt-2">
+										<strong class=" text-white">PATIENT NAME </strong>
+									</div>
+
+									<div class="col-sm-6 col-md-1 border bg-dark pt-2">
+										<strong class=" text-white">AGE  </strong>
+										<small>years</small>
+									</div>
+
+									<div class="col-sm-6 col-md-2 border bg-dark pt-2">
+										<strong class=" text-white">GENDER  </strong>
+									</div>
+
+									<div class="col-sm-6 col-md-4 border bg-dark pt-2">
+										<strong class="text-uppercase text-white">Provisional diagnosis </strong>
+									</div>
+
+									<div class="col-sm-6 col-md-2 border bg-dark pt-2">
+										<strong class=" text-white">ACTIONS </strong>
+									</div>
+
+
+
+								</div>
+
+								<div class=" mb-2 " ng-repeat="diseaseEach in disease track by $index" ng-class="{'border' : diseaseEach.is_edit , 'all-border-warning'  : diseaseEach.is_edit  }"> 
+
+									<div class="row row-eq-height px-3 " style=" padding-top: 1px; ">
+
+										
+										<div class="col-sm-6 col-md-3 border py-2 d-flex align-items-center">  
+											<strong class=" d-md-none d-sm-flex  flex-fill pr-2">PATIENT NAME : </strong> 
+											<span class="flex-fill d-block">{{diseaseEach.name}}</span>
+										</div>
+										
+										<div class="col-sm-6 col-md-1 border  py-2 d-flex align-items-center">  
+											<strong class=" d-md-none d-sm-flex  flex-fill pr-2">AGE : </strong> 
+											<span class="flex-fill d-block">{{diseaseEach.age}}</span> 
+										</div>
+										
+										<div class="col-sm-6 col-md-2 border py-2 d-flex align-items-center">  
+											<strong class=" d-md-none d-sm-flex  flex-fill pr-2">GENDER : </strong> 
+											<span class="flex-fill d-block">{{diseaseEach.gender}}</span>  
+										</div> 
+										<div class="col-sm-6 col-md-4 border py-2 d-flex align-items-center">  
+											<strong class=" d-md-none d-sm-flex  flex-fill pr-2 text-uppercase"> diagnosis :  </strong>
+											<span class="flex-fill d-block">{{diseaseEach.diagnosis}}</span>  
+										</div>
+										
+										<div class="col-sm-6 col-md-2 border py-2  text-center ">  
+											<strong class=" d-md-none d-sm-flex  flex-fill pr-2">ACTION : </strong>  
+
+											<a title="edit" class="btn btn-primary btn-sm" data-toggle="collapse" ng-click="expaCol ( $index  ) " nr-href="" role="button" aria-expanded="{{diseaseEach.is_edit}}" aria-controls="eachada-{{$index}}" ng-hide="diseaseEach.is_edit">
+												<i class="material-icons">
+													edit
+												</i>
+											</a>
+
+											<button title="remove" class="btn btn-sm btn-outline-danger text-capitalize" ng-click="removeData( diseaseEach  ) " title="save as draft" type="button"><i class="material-icons">
+												delete_forever
+											</i></button>
+										</div>
+										
+
+
+									</div>
+
+
+
+
+									<div class="collapse animated fadeIn  fade in "  ng-class="{'show' : diseaseEach.is_edit }" id="eachada-{{$index}}"  data-parent="#tprFrbd">
+										<div class=" card-body p-3	">
+											<div class="row">
+
+												<div class="col-sm-12 col-md-12">
+													<div class="row">
+														<div class="col-sm-12 col-md-3">
+
+															<div class="form-group"> 
+																<label for="name" cclass="form-label pb-2 line-h-13 text-capitalize ">Name <span class="text-danger">*</span></label>
+																<input type="text" class="form-control  mt-2" id="name" name="name" ng-model="diseaseEach.name" required  data-parsley-error-message="Name is required" > 
+															</div>  
+														</div>
+														<div class="col-sm-6 col-md-1">
+															<div class="form-group"> 
+																<label for="age" cclass="form-label pb-2 line-h-13 text-capitalize ">Age <span class="text-danger">*</span></label>
+																<input type="text" class="form-control  mt-2"  data-parsley-type="integer" minlength="1" maxlength="3" id="age" name="age" ng-model="diseaseEach.age" required  required data-parsley-required-message="Age is required" required data-parsley-type-message="invalid age" > 
+															</div>  
+														</div>
+														<div class="col-sm-6 col-md-2">
+
+															<div class="form-group"> 
+																<label for="gender" cclass="form-label line-h-13  text-capitalize">gender <span class="text-danger">*</span></label>
+																<select  class="form-control  mt-2 " id="gender" name="gender" ng-model="diseaseEach.gender" nofill required  data-parsley-error-message="Gender is required" >
+																	<option value="" selected disabled>select</option>
+																	<option value="male">Male</option>
+																	<option value="female">Female</option>
+																	<option value="transgender">Transgender</option> 
+																</select>  
+
+
+
+
+															</div>  
+
+														</div>
+														<div class="col-sm-12 col-md-3">
+
+															<div class="form-group">
+																<label for="diagnosis" class="form-label line-h-13 "> Provisional diagnosis <span class="text-danger">*</span></label> 
+																<select type="text" name="diagnosis" class="form-control  mt-2" id="diagnosis" placeholder="Select diagnosis"  ng-model="diseaseEach.diagnosis"   required> 
+																	<option  ng-repeat="(key, value) in diagnosis track by $index" value="{{value.key}}">{{value.name}}</option>
+																</select> 
+
+																<div class="d-block"  ng-if=" diseaseEach.diagnosis.key == 'others' "> 
+																	<label for="other_diagnosis" cclass="form-label pb-2 line-h-13  " title="Diagnosis other than listed">If others, Specify   <span class="text-danger">*</span></label>
+																	<input type="text" class="form-control  mt-2" id="other_diagnosis" name="other_diagnosis" ng-model="diseaseEach.other_diagnosis" required> 
+																</div> 
+															</div>
+														</div>
+														<div class="col-sm-12 col-md-3">
+
+															<div class="form-group">
+																<label for="desc" class="form-label line-h-13 "> Other conditions suffering    </label>
+																<textarea type="text" name="desc" class="form-control  mt-2" id="desc" placeholder="Enter your Observations .."  ng-model="diseaseEach.desc"></textarea>
+
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-12 col-md-3">
+
+															<div class="form-group">
+																<label for="desc" class="form-label  line-h-13 "> Address   </label>
+																<textarea type="text" name="address" class="form-control  mt-2" id="address" placeholder="Enter your Address .."  ng-model="diseaseEach.address"></textarea>
+
+															</div>
+
+														</div>
+
+														<div class="col-sm-12 col-md-2">
+
+															<div class="form-group">
+																<label for="district" class="form-label  line-h-13 "> District   </label>
+																<select ng-change="diseaseEach.blocks = getMyBlocks( diseaseEach.district )" type="text" name="district" class="form-control  mt-2" id="district" placeholder="Select district"  ng-model="diseaseEach.district"   > 
+																	<option  ng-repeat="district in districts track by $index" value="{{district}}">{{district}}</option>
+																</select> 
+															</div>
+
+														</div>
+
+
+														<div class="col-sm-12 col-md-2">
+
+															<div class="form-group">
+																<label for="block" class="form-label  line-h-13 "> Block   </label>
+																<select type="text" name="block" class="form-control  mt-2" id="block" placeholder="Select block"  ng-model="diseaseEach.block"   > 
+																	<option  ng-repeat="block in diseaseEach.blocks track by $index" value="{{block}}">{{block}}</option>
+																</select> 
+
+															</div>
+
+														</div>
+
+														<div class="col-sm-12 col-md-3">
+
+															<div class="form-group"> 
+																<label for="contact" cclass="form-label line-h-13  text-capitalize">Contact number </label> 
+																<input type="text" data-parsley-type="integer" maxlength="15" minlength="10" class="form-control  mt-2" id="contact" name="contact" ng-model="diseaseEach.contact" > 
+															</div> 
+														</div>
+
+														<div class="col-sm-12 col-md-6 row d-none"> 
+															<div class="col-md-6 col-sm-6    px-2 pt-0"  >  
+																<div class="form-group"> 
+																	<label for="longitude" cclass="form-label line-h-13  text-capitalize">longitude </label>
+																	<input type="text" class="form-control  mt-2" id="longitude" name="plonitude" ng-model="diseaseEach.longitude" > 
+																</div>  
+															</div>
+															<div class="col-md-6 col-sm-6    px-2 pt-0"  >   
+																<div class="form-group"> 
+																	<label for="latitude" cclass="form-label line-h-13  text-capitalize">latitude </label>
+																	<input type="text" class="form-control  mt-2" id="latitude" name="latitude" ng-model="diseaseEach.latitude" > 
+																</div> 
+															</div>
+														</div>
+														<div class="col-sm-12 col-md-2  d-flex align-items-center  "> 
+
+															
+															<button class="btn btn-sm btn-warning text-capitalize  btn-raised w-100" ng-click="saveAsDrft( diseaseEach  ) " title="save as draft" type="button">SAVE</button>
+														</div>
+
+
+
+
+
+													</div>
+												</div>
+												<div class="col-sm-12 col-md-0 d-none">
+													<button class="btn btn-sm btn-success text-capitalize" ng-click="saveAsDrft( diseaseEach  ) " title="save as draft" type="button">SAVE</button>
+												</div>
+
+											</div>
+
+
+
+
+
+										</div>
+									</div>
+
+
+
+
+
+
+
+									
+								</div> 
+
+							</form> 
+
+
+							<form name="diseaseEachProfile24d" id="tprFrbddd" method="post" parsley-data-validation  ng-submit="addMewF( diseaseEachProfile24d )" class="form-horizontal form-element col-12 parsley na-ka p-0"    >  
+
+								<div class=" py-1 "  > 
+
+
+
+									<div class="collapse border border-success   fade in "  ng-class="{'show' : o_is_show }" id="eacLazt"  data-parent="#tprFrbd">
+										<div class=" card-body p-3	">
+											<div class="row">
+
+												<div class="col-sm-12 col-md-12">
+													<div class="row">
+														<div class="col-sm-12 col-md-3">
+
+															<div class="form-group"> 
+																<label for="name" cclass="form-label pb-2 line-h-13 text-capitalize ">Name <span class="text-danger">*</span></label>
+																<input type="text" class="form-control  mt-2" id="name" name="name" ng-model="disease_new.name" required  data-parsley-error-message="Name is required" > 
+															</div>  
+														</div>
+														<div class="col-sm-6 col-md-1">
+															<div class="form-group"> 
+																<label for="age" cclass="form-label pb-2 line-h-13 text-capitalize ">Age <span class="text-danger">*</span></label>
+																<input type="text" class="form-control  mt-2"  data-parsley-type="integer" minlength="1" maxlength="3" id="age" name="age" ng-model="disease_new.age" required data-parsley-required-message="Age is required" required data-parsley-type-message="invalid age" > 
+															</div>  
+														</div>
+														<div class="col-sm-6 col-md-2">
+
+															<div class="form-group"> 
+																<label for="gender" cclass="form-label line-h-13  text-capitalize">gender <span class="text-danger">*</span></label>
+																<select  class="form-control  mt-2 " id="gender" name="gender" ng-model="disease_new.gender" required   data-parsley-error-message="Gender is required" >
+																	<option value="" selected disabled>select</option>
+																	<option value="male">Male</option>
+																	<option value="female">Female</option>
+																	<option value="transgender">Transgender</option> 
+																</select>  
+
+
+
+
+															</div>  
+
+														</div>
+														<div class="col-sm-12 col-md-3">
+
+															<div class="form-group">
+																<label for="diagnosis" class="form-label line-h-13 "> Provisional diagnosis  </label> 
+															<!-- 	<select type="text" name="diagnosis" class="form-control  mt-2" id="diagnosis" placeholder="Select diagnosis"  ng-model="disease_new.diagnosis"   ng-options="value as value.name for value in diagnosis  track by value.key" > </select> 
+															-->
+
+															<select type="text" name="diagnosis" class="form-control  mt-2" id="diagnosis" placeholder="Select diagnosis"  ng-model="disease_new.diagnosis"   > 
+																<option  ng-repeat="(key, value) in diagnosis track by $index" value="{{value.key}}">{{value.name}}</option>
+															</select> 
+
+															
+															<div class="d-block"  ng-if=" disease_new.diagnosis.key == 'others' "> 
+																<label for="other_diagnosis" cclass="form-label pb-2 line-h-13  " title="Diagnosis other than listed">If others, Specify   <span class="text-danger">*</span></label>
+																<input type="text" class="form-control  mt-2" id="other_diagnosis" name="other_diagnosis" ng-model="disease_new.other_diagnosis" > 
+															</div> 
+														</div>
+													</div>
+													<div class="col-sm-12 col-md-3">
+
+														<div class="form-group">
+															<label for="desc" class="form-label line-h-13 "> Other conditions suffering    </label>
+															<textarea type="text" name="desc" class="form-control  mt-2" id="desc" placeholder="Enter your Observations .."  ng-model="disease_new.desc"></textarea>
+
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-12 col-md-3">
+
+														<div class="form-group">
+															<label for="desc" class="form-label  line-h-13 "> Address   </label>
+															<textarea type="text" name="address" class="form-control  mt-2" id="address" placeholder="Enter your Address .."  ng-model="disease_new.address"></textarea>
+
+														</div>
+
+													</div>
+
+
+													<div class="col-sm-12 col-md-2">
+
+														<div class="form-group">
+															<label  for="district" class="form-label  line-h-13 "> District   </label>
+															<select ng-change="disease_new.blocks = getMyBlocks( disease_new.district )" type="text" name="district" class="form-control  mt-2" id="district" placeholder="Select district"  ng-model="disease_new.district"   > 
+																<option  ng-repeat="district in districts track by $index" value="{{district}}">{{district}}</option>
+															</select> 
+														</div>
+
+													</div>
+
+
+													<div class="col-sm-12 col-md-2">
+
+														<div class="form-group">
+															<label for="block" class="form-label  line-h-13 "> Block   </label>
+															<select type="text" name="block" class="form-control  mt-2" id="block" placeholder="Select block"  ng-model="disease_new.block"   > 
+																<option  ng-repeat="block in disease_new.blocks track by $index" value="{{block}}">{{block}}</option>
+															</select> 
+
+														</div>
+
+													</div>
+
+
+
+
+													<div class="col-sm-12 col-md-3">
+
+														<div class="form-group"> 
+															<label for="contact" cclass="form-label line-h-13  text-capitalize">Contact number </label> 
+															<input type="text" data-parsley-type="integer" maxlength="15" minlength="0" class="form-control  mt-2" id="contact" name="contact" ng-model="disease_new.contact" > 
+														</div> 
+													</div>
+
+													<div class="col-sm-12 col-md-6 row d-none"> 
+														<div class="col-md-6 col-sm-6    px-2 pt-0"  >  
+															<div class="form-group"> 
+																<label for="longitude" cclass="form-label line-h-13  text-capitalize">longitude </label>
+																<input type="text" class="form-control  mt-2" id="longitude" name="plonitude" ng-model="disease_new.longitude" > 
+															</div>  
+														</div>
+														<div class="col-md-6 col-sm-6    px-2 pt-0"  >   
+															<div class="form-group"> 
+																<label for="latitude" cclass="form-label line-h-13  text-capitalize">latitude </label>
+																<input type="text" class="form-control  mt-2" id="latitude" name="latitude" ng-model="disease_new.latitude" > 
+															</div> 
+														</div>
+													</div>
+
+													<div class=" col-sm-12 col-md-2 d-flex align-items-end pb-3 ">
+														<button class="btn btn-sm btn-raised w-100 btn-success text-capitalize"   title="save as draft" type="submit">ADD</button>
+													</div>
+
+
+
+
+												</div>
+											</div>
+											<div class="col-sm-12 col-md-0  d-none">
+												<button class="btn btn-sm btn-success text-capitalize"   title="save as draft" type="submit">ADD</button>
+											</div>
+
+										</div>
+
+
+									</div>
+								</div>
+
+
+
+
+								<a class="btn btn-outline-warning " data-toggle="collapse" ng-click="expaColLast ( ) "  role="button" aria-expanded="{{ o_is_show }}" ng-hide="o_is_show" >
+									add new 
+								</a>
+							</div>
+
+						</form> 
+
+
+
+
+
+
+						<div class="row my-2   " >
+
+							<div class="col-6 ">
+
+							</div>
+							<div class="offset-0 col-6  text-right ">
+								<button class="btn btn-outline-success float-right btn-sm    " ng-disabled="disease.length < 1" ng-click="saveData()">submit  <span class="text-danger px-2">{{ disease.length }}</span> forms  </button>
+							</div>
+						</div>
+
+
+
+
+
+					</div>
+
+
+				</div>
+
+			</div>
+
+
+
+		</div> 
+
+	</div>
+</div>
+</section> 

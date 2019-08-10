@@ -1,0 +1,115 @@
+ RewriteEngine on
+ RewriteCond %{REQUEST_FILENAME} !-f 
+ RewriteCond %{REQUEST_FILENAME} !-d 
+
+ RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
+ RewriteRule ^(.*)$ - [E=BASE:%1]
+
+ 
+
+ 
+
+
+
+ #=================================== doctor files
+ RewriteRule ^user-login$ login.php  [L]    
+ RewriteRule ^user-registration$ registration.php  [L]    
+
+
+
+ 
+ RewriteRule ^doctor-dashboard$ doctor/index.php [L]    
+ RewriteRule ^doctor-profile$ doctor/index.php#/profile [L]    
+ RewriteRule ^doctor-settings$ doctor/index.php#/settings [L]   
+
+ RewriteRule ^doctor-report-disease$ doctor/index.php#/report-disease [L]   
+ RewriteRule ^doctor-reported-disease$ doctor/index.php#/reported-disease [L]   
+ RewriteRule ^doctor-view-disease$ doctor/index.php#/view-disease [L]   
+
+ RewriteRule ^doctor-report-file$ doctor/index.php#/report-file [L]   
+ RewriteRule ^doctor-reported-file$ doctor/index.php#/reported-file [L]    
+
+ RewriteRule ^doctor-notification$ doctor/index.php#/notification [L]   
+
+ RewriteRule ^doctor-notification/([^/]+)$ doctor/index.php#/notification.php?key=$1 [L]
+ 
+
+ 
+ #=================================== hospital files
+ RewriteRule ^user-login$ login.php  [L]    
+ RewriteRule ^user-registration$ registration.php  [L]    
+
+
+
+ 
+ RewriteRule ^hospital-dashboard$ hospital/index.php [L]    
+ RewriteRule ^hospital-profile$ hospital/index.php#/profile [L]    
+ RewriteRule ^hospital-settings$ hospital/index.php#/settings [L]   
+
+ RewriteRule ^hospital-report-disease$ hospital/index.php#/report-disease [L]   
+ RewriteRule ^hospital-reported-disease$ hospital/index.php#/reported-disease [L]   
+ RewriteRule ^hospital-view-disease$ hospital/index.php#/view-disease [L]   
+
+ RewriteRule ^hospital-report-file$ hospital/index.php#/report-file [L]   
+ RewriteRule ^hospital-reported-file$ hospital/index.php#/reported-file [L]    
+
+
+ RewriteRule ^hospital-notification$ hospital/index.php#/notification [L]    
+
+ RewriteRule ^hospital-notification/([^/]+)$ hospital/index.php#/notification.php?key=$1 [L]
+
+ 
+ #=================================== admin files
+ RewriteRule ^admin-login$ admin/login.php  [L]    
+ RewriteRule ^admin-dashboard$ admin/index.php [L]    
+ RewriteRule ^admin-profile$ admin/index.php#/profile [L]    
+ RewriteRule ^admin-settings$ admin/index.php#/settings [L]   
+ RewriteRule ^admin-confirmation$ admin/index.php#/confirmation [L]   
+ RewriteRule ^admin-user-existing$ admin/index.php#/user-existing [L]   
+
+ RewriteRule ^admin-user-view$ admin/index.php#/user-view [L]   
+
+
+ 
+ RewriteRule ^admin-reported-disease$ admin/index.php#/reported-disease [L]   
+ RewriteRule ^admin-view-disease$ admin/index.php#/view-disease [L]   
+ 
+ RewriteRule ^admin-reported-file$ admin/index.php#/reported-file [L]    
+
+ RewriteRule ^admin-export-report$ admin/index.php#/export-report [L]    
+
+
+
+
+ #================================== system file
+ 
+ RewriteRule ^global.php$ index.php [L]  
+ RewriteRule ^assets/$ index.php [L]  
+ RewriteRule ^pages/$ index.php [L]   
+ RewriteRule ^root/$ index.php [L]  
+ RewriteRule ^uploads/$ index.php [L]  
+ RewriteRule ^json/$ index.php [L]  
+ RewriteRule ^json/(.*?)$ index.php [L]  
+ RewriteRule ^files/(.*?)$ index.php [L]  
+ 
+ #RewriteRule ^root/index.php$ index.php [L]  
+ #RewriteRule ^root/ajax.php$ index.php [L]  
+ RewriteRule ^root/functions.php$ index.php [L]  
+ RewriteRule ^root/processes.php$ index.php [L]  
+ RewriteRule ^root/admin_processes.php$ index.php [L]  
+ RewriteRule ^root/staff_processes.php$ index.php [L]  
+ RewriteRule ^root/mail.php$ index.php [L]  
+ #RewriteRule ^root/connection.php$ index.php [L]  
+ #RewriteRule ^root/login.php$ index.php [L]  
+ RewriteRule ^root/save_image.php$ index.php [L]  
+
+
+ RewriteRule ^ajax$ _ajax.php [L]  
+ RewriteRule ^login$ _login.php [L]  
+
+
+ RewriteRule ^logout$ logout.php [L]  
+ RewriteRule ^exit$ logout.php [L]  
+ # disable directory browsing
+ #Options All -Indexes 
+ 
